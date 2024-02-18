@@ -8,6 +8,7 @@ df = pd.read_csv('data_Merademy_2024-02-11_to_2024-02-18.csv')
 
 ## Drop rows with NaN values in the 'message' column
 df.dropna(subset=['message'], inplace=True)
+df['message'] = df['message'].str.lower()
 
 # Create a TF-IDF vectorizer
 tfidf_vectorizer = TfidfVectorizer()
@@ -46,7 +47,7 @@ def get_similar_jobs(job_title, cosine_sim=cosine_sim, df=df):
 
 
 def main():
-    st.title("Job Title Similarity Search")
+    st.title("Job Hunt Search")
     
     # Job title search input
     job_title = st.text_input("Enter a job title:", "")
