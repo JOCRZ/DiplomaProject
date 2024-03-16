@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Description to WordCloud</title>
+    <script src="https://unpkg.com/@gradio/client"></script> 
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -80,6 +81,27 @@
     </div>
 
 
+    <script>
+        async function generateWordCloud() {
+            var text = document.getElementById('result').value;
+            var count = document.getElementById('count').value;
+
+            // Make a prediction request to the Gradio app
+            const app = await gradio.client("jojo3416/JobDescriptionWordCloud");
+            const result = await app.predict("/predict", [text, parseInt(count)]);
+
+            // Update the image source with the generated word cloud image
+            document.getElementById('wordCloudImage').src = result.data;
+        }
+
+        function clearFields() {
+            // Clear the textarea and input field
+            document.getElementById('result').value = "";
+            document.getElementById('count').value = "";
+            // Clear the image source
+            document.getElementById('wordCloudImage').src = "";
+        }
+    </script>
     
 </body>
 </html>
