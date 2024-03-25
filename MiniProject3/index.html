@@ -81,7 +81,7 @@
     </div>
 
 
-    <script>
+     <script>
         async function generateWordCloud() {
             var text = document.getElementById('result').value;
             var count = document.getElementById('count').value;
@@ -95,11 +95,19 @@
         }
 
         function clearFields() {
-            // Clear the textarea and input field
-            document.getElementById('result').value = "";
-            document.getElementById('count').value = "";
-            // Clear the image source
-            document.getElementById('wordCloudImage').src = "";
+            // Check if the elements exist before accessing them
+            var resultElement = document.getElementById('result');
+            var countElement = document.getElementById('count');
+
+            if (resultElement && countElement) {
+                // Clear the textarea and input field
+                resultElement.value = "";
+                countElement.value = "";
+                // Clear the image source
+                document.getElementById('wordCloudImage').src = "";
+            } else {
+                console.error("One or both elements not found!");
+            }
         }
     </script>
     
